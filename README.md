@@ -35,7 +35,7 @@ I started by reviewing all four tables and their structure to understand what ea
 
 The common key is `campaign_id`, the unique identifier of an ad campaign. The `non_org_installs_report` table was reviewed but not used in the mart, since installs are not needed to calculate revenue, profit and ROI.
 
-### 2. Mart granularity
+### 2. Mart structure
 
 The mart is built at the level of a single ad campaign: one row = one campaign (`cost_table` contains 40 unique campaigns). It includes:
 
