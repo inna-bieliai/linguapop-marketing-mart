@@ -105,3 +105,27 @@ SAFE_DIVIDE(profit_usd, total_cost_usd) * 100 AS roi_percent
 ```
 
 ROI measures efficiency, not the absolute size of the profit. That is why a campaign with very low spend can have an extremely high ROI. In this data, one campaign spent only $4.39 and earned a $294.80 profit, which gives an ROI of about 6,715%, while campaigns with spend in the thousands of dollars have a much lower ROI but a far larger absolute profit. For this reason, ROI should always be read together with Profit and Total Cost.
+## Data Checks
+
+After building the mart, I checked the results to make sure the join and the calculated metrics are correct.
+
+**No duplicate campaigns.** The final mart has 40 rows and 40 unique `campaign_id` values, which matches the number of unique campaigns in `cost_table`. This confirms that campaigns are not duplicated after the join. Since spend is grouped by `campaign_id`, `campaign` and `media_source`, it also confirms that no `campaign_id` has several campaign names or media sources.
+
+**Unprofitable campaigns.** After calculating Profit, I identified campaigns with a negative result: 17 out of 40 campaigns are unprofitable. The largest loss is -$715.33.
+
+**Consistency of totals.** Across the whole mart:
+
+- Total Cost: $31,870.25
+- Total Revenue: $63,369.84
+- Profit: $31,499.59
+- Overall ROI: 98.84%
+
+Total Profit equals the difference between Total Revenue and Total Cost: $63,369.84 − $31,870.25 = $31,499.59. Overall ROI is calculated on the totals, not as an average of campaign ROIs: $31,499.59 / $31,870.25 × 100 ≈ 98.84%. The key financial metrics are therefore consistent with each other.
+
+**Very high ROI.** One campaign has an ROI of about 6,715%. Such values appear when spend is very small compared to revenue (here, $4.39 of spend and a $294.80 profit). A high ROI does not necessarily mean the largest absolute profit.
+
+## Data Limitations
+
+- **Revenue without spend.** One `campaign_id` (108549135) appears in `ad_revenue_raw` but has no record in `cost_table`. Because the mart starts from `cost_table`, its revenue is not included in the mart.
+- **Organic revenue.** Rows with an empty `campaign_id` (9,329 in `ad_revenue_raw` and 9,123 in `in_app_events_report`) belong to users who did not come from an ad campaign. They were excluded on purpose, because they cannot be attributed to any campaign.
+- **Zero spend.** One campaign has zero spend, so its ROI is NULL (division by zero is handled with `SAFE_DIVIDE`).
