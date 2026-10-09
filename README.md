@@ -64,9 +64,12 @@ Before calculating the metrics, I checked how complete the revenue data is for e
 - 2 campaigns have no revenue of either type (these are included in both counts above).
 
 For missing values I used `COALESCE(..., 0)`: if a campaign has no record for a given revenue type, it is counted as 0 instead of NULL, and the campaign stays in the result.
+
 ### 5. Calculating the metrics
 
 After joining the data at the campaign level, I calculated the main financial metrics that show how effective each campaign is.
+
+The snippets below are simplified for readability; the full query is in `sql/marketing_mart.sql`.
 
 **Total Cost** is the total ad spend of a campaign: the sum of all `cost_usd` values for a given `campaign_id`. If a campaign had several records in `cost_table`, all of its spend is summed into a single value.
 
@@ -105,6 +108,7 @@ SAFE_DIVIDE(profit_usd, total_cost_usd) * 100 AS roi_percent
 ```
 
 ROI measures efficiency, not the absolute size of the profit. That is why a campaign with very low spend can have an extremely high ROI. In this data, one campaign spent only $4.39 and earned a $294.80 profit, which gives an ROI of about 6,715%, while campaigns with spend in the thousands of dollars have a much lower ROI but a far larger absolute profit. For this reason, ROI should always be read together with Profit and Total Cost.
+
 ## Data Checks
 
 After building the mart, I checked the results to make sure the join and the calculated metrics are correct.
