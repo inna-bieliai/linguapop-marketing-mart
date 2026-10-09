@@ -130,6 +130,6 @@ Total Profit equals the difference between Total Revenue and Total Cost: $63,369
 
 ## Data Limitations
 
-- **Revenue without spend.** One `campaign_id` (108549135) appears in `ad_revenue_raw` but has no record in `cost_table`. Because the mart starts from `cost_table`, its revenue is not included in the mart.
+- **Revenue without spend.** One `campaign_id` (108549135) appears in the revenue tables but has no record in `cost_table`. Its revenue totals $279.06 ($92.18 from ad revenue and $186.88 from in-app events), about 0.44% of the mart's Total Revenue. Because the mart starts from `cost_table`, this revenue is not included, and without spend data the campaign's profit and ROI cannot be calculated.
 - **Organic revenue.** Rows with an empty `campaign_id` (9,329 in `ad_revenue_raw` and 9,123 in `in_app_events_report`) belong to users who did not come from an ad campaign. They were excluded on purpose, because they cannot be attributed to any campaign.
 - **Zero spend.** One campaign has zero spend, so its ROI is NULL (division by zero is handled with `SAFE_DIVIDE`).
