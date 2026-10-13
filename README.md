@@ -27,7 +27,7 @@ The tables were loaded into Google BigQuery (Sandbox) from CSV files. The datase
 
 <img src="screenshots/01_bigquery_tables.png" alt="BigQuery tables" width="400">
 
-<img src="screenshots/02_table_schema.png" alt="BigQuery tables" width="600">
+<img src="screenshots/02_table_schema.png" alt="Table schema in BigQuery" width="600">
 
 
 ## Tools
@@ -44,7 +44,7 @@ The common key is `campaign_id`, the unique identifier of an ad campaign. The `n
 
 After loading, I checked that all rows were uploaded correctly:
 
-<img src="screenshots/03_row_counts.png" alt="BigQuery tables" width="500">
+<img src="screenshots/03_row_counts.png" alt="Row counts per table in BigQuery" width="500">
 
 ### 2. Mart structure
 
@@ -122,7 +122,7 @@ ROI measures efficiency, not the absolute size of the profit. That is why a camp
 
 Result of the mart query in BigQuery (40 rows, one per campaign):
 
-<img src="screenshots/04_marketing_mart.png" alt="BigQuery tables" width="800">
+<img src="screenshots/04_marketing_mart.png" alt="Marketing mart query result in BigQuery" width="800">
 
 ## Data Checks
 
