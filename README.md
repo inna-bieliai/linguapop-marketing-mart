@@ -192,3 +192,6 @@ linguapop-marketing-mart/
 │   └── marketing_mart.csv        # resulting mart, used in Tableau
 └── screenshots/                  # BigQuery and dashboard screenshots
 ```
+---
+
+**Author:** Inna Bieliai · [LinkedIn](https://www.linkedin.com/in/inna-bieliai/) · [Tableau Public](https://public.tableau.com/app/profile/inna.bieliai)
