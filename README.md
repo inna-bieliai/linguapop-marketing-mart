@@ -128,8 +128,36 @@ Total Profit equals the difference between Total Revenue and Total Cost: $63,369
 
 **Very high ROI.** One campaign has an ROI of about 6,715%. Such values appear when spend is very small compared to revenue (here, $4.39 of spend and a $294.80 profit). A high ROI does not necessarily mean the largest absolute profit.
 
+## Dashboard
+
+[Open the interactive dashboard on Tableau Public](https://public.tableau.com/app/profile/inna.bieliai/viz/Linguapopmarketing1111/LinguaPopMarketingDashboard)
+
+![LinguaPop marketing dashboard](screenshots/05_dashboard.png)
+
+The dashboard answers one question: which ad campaigns pay off? It contains:
+
+- **KPI row:** Total Cost, Total Revenue, Profit and Overall ROI.
+- **Top 10 campaigns by profit and by ROI:** two rankings, because the largest profit and the best return per dollar are different things.
+- **Profit and ROI by ad network:** which networks earn money and which lose it.
+- **Cost vs revenue per campaign:** every campaign on one chart (log scale); points above the line paid off.
+- **Unprofitable campaigns:** all 17 campaigns with a negative result.
+
+Clicking an ad network filters the KPI row, the scatter plot and the unprofitable campaigns.
+
+## Key Findings
+
+- **Advertising pays off overall.** $31,870.25 of spend brought $63,369.84 of revenue: a profit of $31,499.59 and an overall ROI of 98.84%.
+- **But 17 of 40 campaigns lose money.** The largest loss is -$715.33 (`DE_iOS_Trial_13`). Two campaigns brought no revenue at all (ROI -100%).
+- **Profit and ROI tell different stories.** The campaign with the highest ROI (about 6,715%) spent only $4.39 and earned $294.80, so it is not among the top 10 by profit. Both rankings should be read together.
+- **Largest profit is not the best efficiency.** Vertex Media brings the most profit ($14,225), but Clickwave has the best ROI (156% vs. 125%): profit depends on budget size, ROI on return per dollar.
+- **One network loses money.** Novaleads is negative (about -$458, ROI -45%): 4 of its 5 campaigns are unprofitable. Orbit Network and Pixelboost are technically profitable, but return very little per dollar (ROI 20% and 7%).
+- **Platform pattern.** 11 of the 17 unprofitable campaigns run on iOS, while 7 of the top 10 campaigns by profit run on Android. Platform was read from campaign names; it is an observation, not proof of cause.
+
+**Suggested next steps for the business (based on this data):** review or pause the most unprofitable iOS campaigns and Novaleads, and consider moving budget towards networks with a high ROI, while checking whether their results hold at larger spend.
+
 ## Data Limitations
 
 - **Revenue without spend.** One `campaign_id` (108549135) appears in the revenue tables but has no record in `cost_table`. Its revenue totals $279.06 ($92.18 from ad revenue and $186.88 from in-app events), about 0.44% of the mart's Total Revenue. Because the mart starts from `cost_table`, this revenue is not included, and without spend data the campaign's profit and ROI cannot be calculated.
 - **Organic revenue.** Rows with an empty `campaign_id` (9,329 in `ad_revenue_raw` and 9,123 in `in_app_events_report`) belong to users who did not come from an ad campaign. They were excluded on purpose, because they cannot be attributed to any campaign.
 - **Zero spend.** One campaign has zero spend, so its ROI is NULL (division by zero is handled with `SAFE_DIVIDE`).
+- **Synthetic data.** All findings describe this synthetic dataset only. Some patterns (for example, higher acquisition cost on iOS) were built into the data generation, so they illustrate the analysis method, not real market behaviour.
