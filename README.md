@@ -23,6 +23,13 @@ All data is synthetic and was created for this learning project. The task logic 
 | `in_app_events_report` | Subscriptions, purchases and related events |
 | `non_org_installs_report` | App installs from ad sources |
 
+The tables were loaded into Google BigQuery (Sandbox) from CSV files. The dataset contains the four source tables and the resulting `marketing_mart` table.
+
+<img src="screenshots/01_bigquery_tables.png" alt="BigQuery tables" width="400">
+
+<img src="screenshots/02_table_schema.png" alt="BigQuery tables" width="600">
+
+
 ## Tools
 
 Google BigQuery (Sandbox), SQL, Tableau Public, GitHub.
@@ -34,6 +41,10 @@ Google BigQuery (Sandbox), SQL, Tableau Public, GitHub.
 I started by reviewing all four tables and their structure to understand what each source contains and which fields can be used to join them. I then checked the time period: all four tables cover **1 August – 30 September 2026**, so the data can be combined consistently.
 
 The common key is `campaign_id`, the unique identifier of an ad campaign. The `non_org_installs_report` table was reviewed but not used in the mart, since installs are not needed to calculate revenue, profit and ROI.
+
+After loading, I checked that all rows were uploaded correctly:
+
+<img src="screenshots/03_row_counts.png" alt="BigQuery tables" width="500">
 
 ### 2. Mart structure
 
@@ -108,6 +119,10 @@ SAFE_DIVIDE(profit_usd, total_cost_usd) * 100 AS roi_percent
 ```
 
 ROI measures efficiency, not the absolute size of the profit. That is why a campaign with very low spend can have an extremely high ROI. In this data, one campaign spent only $4.39 and earned a $294.80 profit, which gives an ROI of about 6,715%, while campaigns with spend in the thousands of dollars have a much lower ROI but a far larger absolute profit. For this reason, ROI should always be read together with Profit and Total Cost.
+
+Result of the mart query in BigQuery (40 rows, one per campaign):
+
+<img src="screenshots/04_marketing_mart.png" alt="BigQuery tables" width="800">
 
 ## Data Checks
 
