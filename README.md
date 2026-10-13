@@ -176,3 +176,19 @@ Clicking an ad network filters the KPI row, the scatter plot and the unprofitabl
 - **Organic revenue.** Rows with an empty `campaign_id` (9,329 in `ad_revenue_raw` and 9,123 in `in_app_events_report`) belong to users who did not come from an ad campaign. They were excluded on purpose, because they cannot be attributed to any campaign.
 - **Zero spend.** One campaign has zero spend, so its ROI is NULL (division by zero is handled with `SAFE_DIVIDE`).
 - **Synthetic data.** All findings describe this synthetic dataset only. Some patterns (for example, higher acquisition cost on iOS) were built into the data generation, so they illustrate the analysis method, not real market behaviour.
+
+## Repository Structure
+
+```text
+linguapop-marketing-mart/
+├── README.md
+├── sql/
+│   └── marketing_mart.sql        # full query that builds the mart
+├── data/
+│   ├── cost_table.csv            # ad spend (synthetic)
+│   ├── ad_revenue_raw.csv        # in-app ad revenue (synthetic)
+│   ├── in_app_events_report.csv  # subscriptions and purchases (synthetic)
+│   ├── non_org_installs_report.csv  # installs from ad sources (synthetic)
+│   └── marketing_mart.csv        # resulting mart, used in Tableau
+└── screenshots/                  # BigQuery and dashboard screenshots
+```
